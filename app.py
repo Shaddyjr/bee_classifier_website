@@ -3,7 +3,7 @@ import numpy as np
 from flask import Flask, request, render_template, redirect
 import os
 import ImageHandler
-import cv2
+import cv2 # opencv-python
 import pickle
 import base64
 
