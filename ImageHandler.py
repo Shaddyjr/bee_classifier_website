@@ -1,5 +1,5 @@
 import numpy as np
-from skimage.transform import rescale, resize, rotate
+from skimage.transform import rescale, resize, rotate # scikit-image
 from skimage.color import rgb2gray
 
 class ImageHandler():
