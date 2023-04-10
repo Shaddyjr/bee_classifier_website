@@ -1,46 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bee Image Classifier</title>
-    <!-- STYLE -->
-    <link rel="stylesheet" href="static/css/style.css">
-    <link rel="stylesheet" href="../static/css/style.css">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Bee Image Classifier</title>
+		<!-- STYLE -->
+		<link rel="stylesheet" href="../static/css/style.css" />
 
-    
-    <!-- JQUERY -->
-    <script
-        src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
-        crossorigin="anonymous"></script>
-    
-    <!-- CUSTOM -->
-    <!-- <script src="static/js/script.js" defer></script> -->
-    <script src="../static/js/script.js" defer></script>
-</head>
-<body>
-    <main>
-        <header>
-            <h1>Bee Image Classifier</h1>
-            <h3>Check to see if your bee has a <br><a href="https://ipm.missouri.edu/MPG/2013/7/Colony-Collapse-Disorder-the-Varroa-Mite-and-Resources-for-Beekeepers/" target="_blank"><span>varroa</span> mite</a>!</h3>
-        </header>
-        <div class="form-container">
-            <form action="/submit" method = "POST" enctype='multipart/form-data'>
-                <img src="../static/img/bee.gif" alt="" onclick="$('#img_file').click();">
-                <label for="file" onclick="$('#img_file').click();">
-                    Choose an image
-                </label>
-                <input type="file" name="file" id="img_file">
-                <!-- <input type="submit" value="Submit!"> -->
-            </form>
-        </div>
-    
-        <footer>
-            <p>Proof of concept on <a href="https://github.com/Shaddyjr/bee-image-classifier" target="_blank">GitHub</a></p>
-            <p>Made by: <a href="https://mahdis.pw" target="_blank">Mahdi Shadkam-Farrokhi</a></p>
-        </footer>
-    </main>
-</body>
+		<!-- JQUERY -->
+		<script
+			src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+			integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
+			crossorigin="anonymous"
+		></script>
+
+		<!-- CUSTOM -->
+		<script src="../static/js/script.js" defer></script>
+	</head>
+	<body>
+		<main>
+			<header class="md-pad">
+				<h1>Bee Image Classifier</h1>
+				<h3>
+					Check to see if your bee has a <br /><a
+						href="https://ipm.missouri.edu/MPG/2013/7/Colony-Collapse-Disorder-the-Varroa-Mite-and-Resources-for-Beekeepers/"
+						target="_blank"
+						><span>varroa</span> mite</a
+					>!
+				</h3>
+			</header>
+			<div class="flex-container bee-img-container half-width md-pad">
+				<div class="flex-container column md-pad">
+					<h3>Example of healthy bee</h3>
+					<img class="bee-img" src="../static/img/healthy.png" />
+				</div>
+				<div class="flex-container column md-pad">
+					<h3>Example of bee with a varroa mite</h3>
+					<img class="bee-img" src="../static/img/has_varroa.png" />
+				</div>
+			</div>
+			<div class="flex-container lg-pad">
+				<form action="/submit" method="POST" enctype="multipart/form-data">
+					<img src="../static/img/bee.gif" alt="" onclick="$('#img_file').click();" />
+					<label for="file" onclick="$('#img_file').click();"> Choose an image </label>
+					<input type="file" name="file" id="img_file" />
+				</form>
+			</div>
+			<div class="footer-flex-padding"></div>
+			<footer>
+				<p>Proof of concept on <a href="https://github.com/Shaddyjr/bee-image-classifier" target="_blank">GitHub</a></p>
+				<p>Made by: <a href="https://mahdis.pw" target="_blank">Mahdi Shadkam-Farrokhi</a></p>
+			</footer>
+		</main>
+	</body>
 </html>

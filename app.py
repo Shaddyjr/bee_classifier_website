@@ -4,15 +4,15 @@ from flask import Flask, request, render_template, redirect
 import os
 import ImageHandler
 import cv2 # opencv-python
-import pickle
 import base64
+from tensorflow.keras.models import load_model
 
 os.environ['THEANO_FLAGS'] = 'optimizer=None'
 app = Flask(__name__)
 
 model = None
 
-MODEL_PATH = "./models/model.p"
+MODEL_PATH = "./models/best_original.h5"
 UPLOAD_FOLDER = './static/img'
 filename = "single_file.png"
 
@@ -23,21 +23,9 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 file_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
 
-def load_model():
-    global model
-    model = pickle.load(open(MODEL_PATH, 'rb'))
-
-
-def convert_and_save(b64_string):
-    io = StringIO()
-    with open(io, "wb") as fh:
-        fh.write(base64.decodebytes(b64_string.encode()))
-    return io
-
 @app.route('/')
 def form():
     return render_template("form.html")
-
 
 @app.route('/submit', methods = ["POST"])
 def submit():
@@ -59,10 +47,9 @@ def submit():
     img = cv2.imdecode(npimg, cv2.IMREAD_COLOR)
     # resize and normalize data for modeling
     ih = ImageHandler.ImageHandler([img]).resize((54,50)).normalize()
-    # predict using model (within tf graph namespace?)
-    # with graph.as_default():
-    #     result = model.predict_classes(ih.images)
-    result = model.predict_classes(ih.images)
+    # predict using model
+    model = load_model(MODEL_PATH, compile=False)
+    result = model.predict(ih.images)
     
     ### HANDLING IMAGE VISUALIZATION ###
     file.seek(0)
@@ -77,5 +64,4 @@ def submit():
         )
 
 if __name__ == '__main__':
-    load_model()
     app.run()

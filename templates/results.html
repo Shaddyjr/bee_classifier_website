@@ -1,18 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Bee Classification Results</title>
-</head>
-<body>
-    <h1>Here's your prediction!</h1>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Bee Classification Results</title>
+		<!-- STYLE -->
+		<link rel="stylesheet" href="../static/css/style.css" />
+	</head>
+	<body>
+		<main>
+			<header class="lg-pad">
+				<h1>Here's your prediction!</h1>
+			</header>
 
-    <h3>{{result}}</h3>
-    <img src="data:image/png;base64,{{image_data}}" alt="">
+			<div class="flex-container column lg-pad">
+				{% set final_result = result|round %} {% if final_result == 1 %}
+				<h3 class="red-text">HAS VARROA!</h3>
+				<img class="red-border result-img" src="data:image/png;base64,{{image_data}}" alt="" />
+				{% else %}
+				<h3 class="green-text">HEALTHY!</h3>
+				<img class="green-border result-img" src="data:image/png;base64,{{image_data}}" alt="" />
+				{% endif %}
 
-    <a href="#">Submit another image?</a>
+				<h4 class="model-text">
+					The model predicted the likelihood of this image containing a varroa mite was:
+					<span class="result-number">{{'%0.2f' % (result * 100)}}%</span>
+				</h4>
 
-</body>
+				<a href="/">Submit another image?</a>
+			</div>
+			<div class="footer-flex-padding"></div>
+			<footer>
+				<p>Proof of concept on <a href="https://github.com/Shaddyjr/bee-image-classifier" target="_blank">GitHub</a></p>
+				<p>Made by: <a href="https://mahdis.pw" target="_blank">Mahdi Shadkam-Farrokhi</a></p>
+			</footer>
+		</main>
+	</body>
 </html>
